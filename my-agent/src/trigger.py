@@ -157,9 +157,10 @@ async def main():
     app.add_routes(routes)
     runner = web.AppRunner(app)
     await runner.setup()
-    site = web.TCPSite(runner, "0.0.0.0", 8080)
+    port = int(os.environ.get("PORT", 8080))
+    site = web.TCPSite(runner, "0.0.0.0", port)
     await site.start()
-    logger.info(f"[trigger] HTTP on :8080 agent:{AGENT_NAME} trunk:{LIVEKIT_SIP_TRUNK_ID}")
+    logger.info(f"[trigger] HTTP on :{port} agent:{AGENT_NAME} trunk:{LIVEKIT_SIP_TRUNK_ID}")
     await asyncio.Event().wait()
 
 
