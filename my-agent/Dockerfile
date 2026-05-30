@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 
 COPY pyproject.toml uv.lock ./
-RUN mkdir -p src
+RUN mkdir -p src  
 RUN uv sync --locked
 
 COPY . .
